@@ -3317,7 +3317,6 @@ button:not(:disabled) {
 ************************/
 .error {
   margin: 8px 0px;
-  display: none;
   color: #f86446;
 }
 

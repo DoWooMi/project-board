@@ -18,16 +18,16 @@
                       
         <div class="buy-button" >
 			  <c:choose>
-			    <c:when test="${not empty loginHost}">
+			    <c:when test="${not empty loginHewon}">
 			      <!-- 로그인한 경우 -->
-			      <a href="" class="btn btn-primary scroll-down">
-			        <span>로그아웃</span>
+			      <a href="${pageContext.request.contextPath }/logout" class="btn btn-primary scroll-down">
+			        <span>Logout</span>
 			      </a>
 			    </c:when>
 			    <c:otherwise>
 			      <!-- 로그인하지 않은 경우 -->
-			      <a href="" class="btn btn-primary scroll-down">
-			        <span>로그인</span>
+			      <a href="${pageContext.request.contextPath }/login" class="btn btn-primary scroll-down">
+			        <span>Login</span>
 			      </a>
 			    </c:otherwise>
 			  </c:choose>
@@ -43,11 +43,11 @@
                 </li>
 
                 <li>
-                    <a href="">Blog</a>
+                    <a href="${pageContext.request.contextPath}/blog">Blog</a>
                 </li>
 
                 <li>
-                    <a href="">Schedule</a>
+                    <a href="${pageContext.request.contextPath}/new">New Post</a>
                 </li>
             </ul>
         </div><!--end navigation-->
