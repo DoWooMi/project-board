@@ -40,19 +40,19 @@
 		<!-- typeAliasesPackage 필드에 DTO 클래스를 작성한 패키지가 저장되도록 인젝션 처리 -->
 		<!-- => XML 기반의 매퍼파일(MapperFile)에서 Java 자료형 대신 사용할 별칭을 제공하기 위한 기능 -->
 		<!-- => Mybatis 환경설정파일에서 typeAliases 엘리먼트의 package 엘리먼트와 유사한 기능 제공 -->
-		<!-- <property name="typeAliasesPackage" value="xyz.itwill.dto"/>-->
+		<property name="typeAliasesPackage" value="xyz.hello.dto"/>
 		
 		<!-- mapperLocations 필드에 List 객체를 생성하여 저장되도록 인젝션 처리 -->
 		<!-- => List 객체에는 XML 기반의 매퍼 파일의 경로가 요소값으로 저장되도록 추가 - 매퍼 등록 -->
 		<!-- => Mybatis 환경설정파일에서 mappers 엘리먼트의 package 엘리먼트와 유사한 기능 제공 -->
 		
-<!-- 		<property name="mapperLocations">
+ 		<property name="mapperLocations">
 			<list>
-				[src/main/java] 폴더의 패키지에 매퍼 파일을 작성하기 위한 classpath 접두사 사용 
+				<!-- [src/main/java] 폴더의 패키지에 매퍼 파일을 작성하기 위한 classpath 접두사 사용  -->
 				<value>classpath:xyz/hello/mapper/*.xml</value>
 			</list>
 		</property>				
-	  -->
+	  
 	</bean>
 	<!-- SqlSession 관련 클래스를 Spring Bean으로 등록 -->
 	<!-- => SqlSessionTemplate 클래스로 객체를 생성하기 위한 생성자 매개변수에 SqlSessionFactoryBean

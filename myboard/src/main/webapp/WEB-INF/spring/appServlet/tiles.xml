@@ -9,13 +9,12 @@
 		<put-attribute name="footer" value="/WEB-INF/views/layout/footer.jsp"/>
 	</definition>
 
-		<definition name="*" extends="home">
+	<definition name="*" extends="home">
 		<put-attribute name="content" value="/WEB-INF/views/{1}.jsp"/>
 	</definition>
 
 	<definition name="*/*" extends="home">
 		<put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp"/>
-		
 	</definition>
 
 	

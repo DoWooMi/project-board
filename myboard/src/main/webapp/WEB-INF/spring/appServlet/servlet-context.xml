@@ -39,7 +39,13 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="xyz.hello.controller" />
+	<context:component-scan base-package="xyz.hello.dao" />
+	<context:component-scan base-package="xyz.hello.service" />
 	
+	<beans:bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="multipartResolver">
+		<beans:property name="maxUploadSize" value="20971520"/>
+		<beans:property name="defaultEncoding" value="utf-8"/>
+	</beans:bean>
 	
 	
 </beans:beans>
