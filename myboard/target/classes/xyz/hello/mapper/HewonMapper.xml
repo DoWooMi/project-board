@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.hello.mapper.HewonMapper">
+
+	<insert id="insertHewon">
+		insert into hewon values( #{id}, #{pw}, #{phone}, #{name}, #{email})
+	</insert>
+	
+	<update id="updateHewon">
+		update hewon
+		<set>
+			<if test="pw!=null and pw!=''">
+				pw=#{pw},
+			</if>
+			<if test="phone!=null and phone!=''">
+				phone=#{phone},
+			</if>
+			<if test="name!=null and name!=''">
+				name=#{name},
+			</if>
+			<if test="email!=null and email!=''">
+				email=#{email}
+			</if>
+		</set>
+		where id=#{id}
+	</update>
+	
+	<select id="selectHewon" resultType="Hewon">
+		select * from hewon where id=#{id}
+	</select>
+
+</mapper>

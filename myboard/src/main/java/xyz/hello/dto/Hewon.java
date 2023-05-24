@@ -5,7 +5,6 @@ import lombok.Data;
 /*
 이름    널?       유형            
 ----- -------- ------------- 
-H_IDX NOT NULL NUMBER(10)    
 ID    NOT NULL VARCHAR2(20)  
 PW    NOT NULL VARCHAR2(100) 
 PHONE NOT NULL VARCHAR2(20)  
@@ -17,7 +16,6 @@ EMAIL NOT NULL VARCHAR2(100)
 
 @Data
 public class Hewon {
-	private int hIdx;
 	private String id;
 	private String pw;
 	private String phone;
