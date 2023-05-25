@@ -37,7 +37,7 @@ td {
 			<tr>
 				<th>내용</th>
 				<td>
-					<textarea rows="18" cols="131" name="content" id="content" style="text-align: left;"></textarea>
+					<textarea rows="18" cols="145" name="content" id="content" style="text-align: left;"></textarea>
 				</td>
 			</tr>
 		</table>	
@@ -46,7 +46,7 @@ td {
 	<br>
 		<p><button onclick="noticeAdd();" type="button" id="writeBtn" class="btn btn-primary btn-sm">게시글등록</button>
 		<button type="button" id="resetBtn" class="btn btn-primary btn-sm" onclick="reset();">다시작성</button>
-		<button type="button" id="listBtn" class="btn btn-primary btn-sm" onclick="location.href='${pageContext.request.contextPath }/admin/notice?nmstatus=2&nstatus=2';">게시글목록</button></p>
+		<button type="button" id="listBtn" class="btn btn-primary btn-sm" onclick="location.href='${pageContext.request.contextPath }/blog';">게시글목록</button></p>
 	</div>
 	</div>
 	</div>
