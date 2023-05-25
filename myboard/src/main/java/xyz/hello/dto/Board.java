@@ -26,5 +26,7 @@ public class Board {
 	private String img;
 	private String bhid;
 	
+	private int rn;
+	
 	
 }

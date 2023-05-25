@@ -9,7 +9,7 @@ C_IDX  NOT NULL NUMBER(10)
 REPLY  NOT NULL VARCHAR2(1000) 
 C_DATE NOT NULL DATE           
 U_DATE          DATE           
-C_HIDX NOT NULL NUMBER(10)     
+C_HID NOT NULL VARCHAR2(20)    
 C_BIDX NOT NULL NUMBER(10) 
  */
 
@@ -17,10 +17,10 @@ C_BIDX NOT NULL NUMBER(10)
 
 @Data
 public class Comments {
-	private int cIdx;
+	private int cidx;
 	private String reply;
-	private String cDate;
-	private String uDate;
-	private int cHidx;
-	private int cBidx;
+	private String cdate;
+	private String udate;
+	private String chid;
+	private int cbidx;
 }

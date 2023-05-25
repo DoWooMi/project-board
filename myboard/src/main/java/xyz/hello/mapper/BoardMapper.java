@@ -10,6 +10,7 @@ public interface BoardMapper {
 	int insertBoard(Board board);
 	int updateBoard(Board board);
 	int deleteBoard(int bidx);
+	int selectBoardCount(Map<String, Object> params);
 	Board selectBoard(int bidx);
 	List<Board> selectBoardList(Map<String, Object> map);
 

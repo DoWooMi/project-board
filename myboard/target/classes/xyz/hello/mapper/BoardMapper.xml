@@ -33,8 +33,33 @@
 		select * from board where b_idx=#{bidx}
 	</select>
 	
-	<select id="selectBoardList" resultType="Board">
-		select * from (select rownum rn, boardlist.* from (select * from board order by b_idx desc) boardlist ) where rn between #{startRow} and #{endRow}
+	<select id="selectBoardCount" parameterType="map" resultType="int">
+		select count(*) from board
+		<where>
+			<if test="sDate != null and sDate!=''">
+				and c_date <![CDATA[>=]]> #{sDate}
+			</if>
+			<if test="eDate!=null and eDate!=''">
+				and c_date <![CDATA[<=]]> #{eDate}
+			</if>
+			<if test="keyword!=null and keyword!=''">
+				<bind name="keyword" value="'%'+keyword+'%'"/>
+				and keyword like #{keyword}
+			</if>
+		</where>
+	</select>
+	
+	<select id="selectBoardList"  parameterType="map" resultType="Board">
+		select * from (select rownum rn, boardlist.* from (select * from board 
+		<where>
+			<if test="sDate != null and sDate!=''">
+				and c_date <![CDATA[>=]]> #{sDate}
+			</if>
+			<if test="eDate!=null and eDate!=''">
+				and c_date <![CDATA[<=]]> #{eDate}
+			</if>
+		</where>
+		order by b_idx desc) boardlist ) where rn between #{startRow} and #{endRow}
 	</select>
 </mapper>
 
