@@ -50,7 +50,7 @@
                      
                     <div style="text-align: center;">
 					<br>
-					<p><button onclick="location.href='${pageContext.request.contextPath }/view?bidx=${boardview.bidx }';" type="button" class="btn btn-primary btn-sm" >게시글변경</button>
+					<p><button onclick="location.href='${pageContext.request.contextPath }/modify?bidx=${boardview.bidx }';" type="button" class="btn btn-primary btn-sm" >게시글변경</button>
 					<button onclick="location.href='${pageContext.request.contextPath }/blog';" type="button" class="btn btn-primary btn-sm">게시글목록</button>
 					<button onclick="location.href='${pageContext.request.contextPath }/delete?bidx=${boardview.bidx}';" type="button" class="btn btn-primary btn-sm">게시글삭제</button></p>
 					</div>

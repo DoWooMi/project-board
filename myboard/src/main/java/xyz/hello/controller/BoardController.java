@@ -72,7 +72,7 @@ public class BoardController {
 		boardinfo.setImg(uploadFilename);
 		boardService.modifyBoard(boardinfo);
 		
-		return "redirect:/blog";
+		return "redirect:/blog?bidx="+board.getBidx();
 	}
 	
 	//게시글리스트출력
@@ -123,6 +123,41 @@ public class BoardController {
 		boardService.removeBoard(bidx);
 		return "redirect:/blog";
 	}
+	
+	//게시글변경폼
+	@RequestMapping(value = "/modify", method = RequestMethod.GET)
+	public String modifyblog(@RequestParam int bidx, Model model) throws BoardNotFoundException {
+		model.addAttribute("boardinfo", boardService.getBoard(bidx));
+		return "blog/modify";
+	}
+	
+	//게시글변경처리(파일처리포함)
+	@RequestMapping(value = "/modify", method = RequestMethod.POST)
+	public String modifyblog(@RequestParam MultipartFile uploadFile, Model model, @ModelAttribute Board board) throws BoardNotFoundException, IOException {
+		
+		String uploadDirectory=context.getServletContext().getRealPath("/resources/img");
+		String originalFilename=uploadFile.getOriginalFilename();
+		File file=new File(uploadDirectory, originalFilename);
+		String uploadFilename=originalFilename;
+		
+		int i=0;
+		while(file.exists()) {
+			i++;
+			int index=originalFilename.lastIndexOf(".");
+			uploadFilename=originalFilename.substring(0, index)+"_"+i+originalFilename.substring(index);
+			file=new File(uploadDirectory, uploadFilename);
+		}
+		uploadFile.transferTo(file);
+		
+		model.addAttribute("originalFilename", originalFilename);
+		model.addAttribute("uploadFilename", uploadFilename);
+		
+		Board boardinfo=boardService.getBoard(board.getBidx());
+		boardinfo.setImg(uploadFilename);
+		boardService.modifyBoard(boardinfo);
+		return "redirect:/view?bidx="+board.getBidx();
+	}
+	
 	
 	
 	//예외처리
