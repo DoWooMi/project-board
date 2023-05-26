@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -114,6 +115,20 @@ public class BoardController {
 		model.addAttribute("boardview", board);
 		model.addAttribute("hewoninfo", hewonService.getHewon(boardService.getBoard(bidx).getBhid()));
 		return "blog/view";
+	}
+	
+	//게시글삭제
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public String deleteblog(@RequestParam int bidx) throws BoardNotFoundException {
+		boardService.removeBoard(bidx);
+		return "redirect:/blog";
+	}
+	
+	
+	//예외처리
+	@ExceptionHandler(BoardNotFoundException.class)
+	public String userinfoExceptionHandler(BoardNotFoundException exception) {
+		return "exception/exception";
 	}
 
 }
