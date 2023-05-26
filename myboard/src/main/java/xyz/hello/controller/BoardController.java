@@ -109,10 +109,8 @@ public class BoardController {
 	//게시글출력폼
 	@RequestMapping(value = "/view", method = RequestMethod.GET)
 	public String blogview(@RequestParam int bidx, Model model) throws BoardNotFoundException, HewonNotFoundException {
-		Board board= boardService.getBoard(bidx);
-		board.setCnt(board.getCnt()+1);
-		boardService.modifyBoard(board);
-		model.addAttribute("boardview", board);
+		boardDAO.updateBoardcount(bidx);
+		model.addAttribute("boardview", boardService.getBoard(bidx));
 		model.addAttribute("hewoninfo", hewonService.getHewon(boardService.getBoard(bidx).getBhid()));
 		return "blog/view";
 	}

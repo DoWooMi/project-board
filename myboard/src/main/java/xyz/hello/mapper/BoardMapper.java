@@ -11,6 +11,7 @@ public interface BoardMapper {
 	int updateBoard(Board board);
 	int deleteBoard(int bidx);
 	int selectBoardCount(Map<String, Object> params);
+	int updateBoardcount(int bidx);
 	Board selectBoard(int bidx);
 	List<Board> selectBoardList(Map<String, Object> map);
 

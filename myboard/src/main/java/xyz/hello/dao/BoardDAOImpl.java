@@ -46,4 +46,9 @@ public class BoardDAOImpl implements BoardDAO {
 		return sqlSession.getMapper(BoardMapper.class).selectBoardCount(params);
 	}
 
+	@Override
+	public int updateBoardcount(int bidx) {
+		return sqlSession.getMapper(BoardMapper.class).updateBoardcount(bidx);
+	}
+
 }

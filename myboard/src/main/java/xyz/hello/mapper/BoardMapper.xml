@@ -28,6 +28,12 @@
 		where b_idx=#{bidx}
 	</update>
 	
+	<update id="updateBoardcount">
+		update board set cnt=cnt+1 where b_idx=#{bidx}
+	</update>
+	
+	
+	
 	<delete id="deleteBoard">
 		delete from board where b_idx=#{bidx}
 	</delete>
