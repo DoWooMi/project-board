@@ -96,7 +96,7 @@ function noticeListDisplay(pageNum) {
                 html += "<img src='${pageContext.request.contextPath}/img/"+this.img+"' style='height: 300px; width: 400px;'>";
                 html += "</div>";
                 html += "<div class='content'>";
-                html += "<h3 class='h5 mb-2'><a href='${pageContext.request.contextPath}/blog/view'>"+this.title+"</a></h3>";
+                html += "<h3 class='h5 mb-2'><a href='${pageContext.request.contextPath}/view?bidx="+this.bidx+"'>"+this.title+"</a></h3>";
                 html += "<div class='tag alt-font'>";
                 html += "<span class='d-inline-block text-primary'>"+this.cdate+"</span>";
                 html += "</div>";

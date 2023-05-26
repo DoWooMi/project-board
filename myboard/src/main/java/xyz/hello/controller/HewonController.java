@@ -54,7 +54,7 @@ public class HewonController {
 	@ExceptionHandler(LoginAuthFailException.class)
 	public String exceptionhandler(LoginAuthFailException exception, Model model) {
 		model.addAttribute("message", exception.getMessage());
-		model.addAttribute("hid", exception.getId());
+		model.addAttribute("id", exception.getId());
 		return "hewon/LoginForm";
 	}
 	

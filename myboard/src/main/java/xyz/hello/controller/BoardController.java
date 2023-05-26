@@ -23,7 +23,9 @@ import xyz.hello.dao.BoardDAO;
 import xyz.hello.dto.Board;
 import xyz.hello.dto.Hewon;
 import xyz.hello.exception.BoardNotFoundException;
+import xyz.hello.exception.HewonNotFoundException;
 import xyz.hello.service.BoardService;
+import xyz.hello.service.HewonService;
 import xyz.hello.util.Pager;
 
 @Controller
@@ -33,7 +35,9 @@ public class BoardController {
 	private final BoardService boardService;
 	private final WebApplicationContext context;
 	private final BoardDAO boardDAO;
+	private final HewonService hewonService;
 	
+	//게시글등록폼
 	@RequestMapping(value = "/new", method = RequestMethod.GET)
 	public String write(HttpSession session, Model model) {
 		Hewon loginHewon= (Hewon)session.getAttribute("loginHewon");
@@ -70,7 +74,7 @@ public class BoardController {
 		return "redirect:/blog";
 	}
 	
-	
+	//게시글리스트출력
 	@RequestMapping(value = "/blog", method = RequestMethod.GET)
 	public String blogmain() {
 		return "blog/main";
@@ -99,6 +103,17 @@ public class BoardController {
 		resultMap.put("pager", pager);
 		
 		return resultMap; 
+	}
+	
+	//게시글출력폼
+	@RequestMapping(value = "/view", method = RequestMethod.GET)
+	public String blogview(@RequestParam int bidx, Model model) throws BoardNotFoundException, HewonNotFoundException {
+		Board board= boardService.getBoard(bidx);
+		board.setCnt(board.getCnt()+1);
+		boardService.modifyBoard(board);
+		model.addAttribute("boardview", board);
+		model.addAttribute("hewoninfo", hewonService.getHewon(boardService.getBoard(bidx).getBhid()));
+		return "blog/view";
 	}
 
 }

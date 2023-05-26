@@ -11,7 +11,7 @@ CONTENT NOT NULL VARCHAR2(2000)
 C_DATE  NOT NULL DATE           
 CNT     NOT NULL NUMBER(10)     
 IMG              VARCHAR2(500)  
-B_HID  NOT NULL VARCHAR2(20) 
+B_HID   NOT NULL VARCHAR2(20)   
  */
 
 //create sequence b_idx;

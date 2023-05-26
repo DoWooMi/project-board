@@ -19,7 +19,10 @@
 				content=#{content},
 			</if>
 			<if test="img!=null and img!=''">
-				img=#{img}
+				img=#{img},
+			</if>
+			<if test="cnt!=null and cnt!=''">
+				cnt=#{cnt}
 			</if>
 		</set>
 		where b_idx=#{bidx}

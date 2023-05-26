@@ -43,8 +43,11 @@ public class HewonServiceImpl implements HewonService {
 	@Override
 	public Hewon loginAuth(Hewon hewon) throws LoginAuthFailException {
 		Hewon authHewon=hewonDAO.selectHewon(hewon.getId());
-		if(authHewon ==null) {
+		if(authHewon ==null || authHewon.getId().equals("")) {
 			throw new LoginAuthFailException("아이디의 회원정보가 존재하지 않습니다.", hewon.getId());
+		}
+		if(!hewon.getPw().equals(authHewon.getPw())) {
+			throw new LoginAuthFailException("비밀번호가 일치하지 않습니다.", hewon.getId());			
 		}
 		return authHewon;
 	}
