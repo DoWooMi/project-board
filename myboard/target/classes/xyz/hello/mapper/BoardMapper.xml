@@ -49,7 +49,7 @@
 				and c_date <![CDATA[>=]]> #{sDate}
 			</if>
 			<if test="eDate!=null and eDate!=''">
-				and c_date <![CDATA[<=]]> #{eDate}
+				and c_date <![CDATA[<=]]> TO_DATE(#{eDate}, 'YYYY-MM-DD')+1
 			</if>
 			<if test="keyword!=null and keyword!=''">
 				<bind name="keyword" value="'%'+keyword+'%'"/>
@@ -65,7 +65,7 @@
 				and c_date <![CDATA[>=]]> #{sDate}
 			</if>
 			<if test="eDate!=null and eDate!=''">
-				and c_date <![CDATA[<=]]> #{eDate}
+				and c_date <![CDATA[<=]]> TO_DATE(#{eDate}, 'YYYY-MM-DD')+1
 			</if>
 		</where>
 		order by b_idx desc) boardlist ) where rn between #{startRow} and #{endRow}
