@@ -10,4 +10,5 @@ public interface HewonDAO {
 	int updatePassword(Hewon hewon);
 	Hewon selectHewon(String id);
 	List<Hewon> selectHewonList();
+	int deleteHewon(String id);
 }

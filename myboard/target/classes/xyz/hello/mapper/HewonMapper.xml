@@ -28,5 +28,9 @@
 	<select id="selectHewon" resultType="Hewon">
 		select * from hewon where id=#{id}
 	</select>
+	
+	<delete id="deleteHewon">
+		delete from hewon where id=#{id}
+	</delete>
 
 </mapper>

@@ -33,8 +33,8 @@
 		<div class="my">📧 이메일 : <span>${loginHewon.email }</span></div>	
 		<div class="my">☎ 전화번호 : <span>${loginHewon.phone }</span></div>	
 	<br>
-	<button type="submit" id="hewonBtn">회원정보변경</button>
-	<button type="submit" id="hewonBtn">회원탈퇴</button>
+	<button type="button" id="hewonBtn" onclick="location.href='${pageContect.request.contextPath}/controller/updatehewon'">회원정보변경</button>
+	<button type="button" id="hewonBtn" onclick="location.href='${pageContect.request.contextPath}/controller/deletehewon'">회원탈퇴</button>
 	</div>	
 </div>
 </body>

@@ -40,4 +40,9 @@ public class HewonDAOImpl implements HewonDAO {
 		return sqlsession.getMapper(HewonMapper.class).selectHewonList();
 	}
 
+	@Override
+	public int deleteHewon(String id) {
+		return sqlsession.getMapper(HewonMapper.class).deleteHewon(id);
+	}
+
 }
