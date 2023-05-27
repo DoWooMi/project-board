@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
     <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     
 <!DOCTYPE html>
 <html>
@@ -33,7 +34,7 @@
                                  <ul class="meta ps-0 d-flex justify-content-between">
                                      <li>조회수 : <span>${boardview.cnt }</span></li>
                                      <li>작성자 : <span>${hewoninfo.name }</span></li>
-                                     <li>작성일자 : <span>${boardview.cdate }</span></li>
+                                     <li>작성일자 : <span>${boardview.cdate.substring(0,10)}</span></li>
                                  </ul>
                              </div>
                          <div class="post-img">

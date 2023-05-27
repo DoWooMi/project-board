@@ -47,5 +47,16 @@
 		<beans:property name="defaultEncoding" value="utf-8"/>
 	</beans:bean>
 	
+	<beans:bean class="xyz.hello.util.HewonAuthInterceptor" id="hewonAuthInterceptor"/>
+	
+	<interceptors>
+		<interceptor>
+			<mapping path="/new"/>
+			<mapping path="/delete"/>
+			<mapping path="/modify"/>
+			<beans:ref bean="hewonAuthInterceptor"/>
+		</interceptor>	
+	</interceptors>
+	
 	
 </beans:beans>
