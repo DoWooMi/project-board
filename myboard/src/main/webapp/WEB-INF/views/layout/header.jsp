@@ -39,7 +39,7 @@
         <div id="navigation">
             <ul class="navigation-menu">
                 <li>
-                    <a href="">MyPage</a>
+                    <a href="${pageContext.request.contextPath }/mypage">MyPage</a>
                 </li>
 
                 <li>

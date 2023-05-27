@@ -50,6 +50,13 @@ public class HewonController {
 		return "redirect:/";
 	}
 	
+	@RequestMapping(value = "/mypage", method = RequestMethod.GET)
+	public String mypage(HttpSession session, Model model) {
+		Hewon hewoninfo= (Hewon)session.getAttribute("loginHewon");
+		model.addAttribute("loginHewon", hewoninfo);
+		return "hewon/mypage";
+	}
+	
 	
 	@ExceptionHandler(LoginAuthFailException.class)
 	public String exceptionhandler(LoginAuthFailException exception, Model model) {
