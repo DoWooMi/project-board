@@ -11,7 +11,8 @@ REGROUP NOT NULL NUMBER(4)    	//답글그룹
 RESTEP  NOT NULL NUMBER(4)    	//답글그룹중에서 순서
 RELEVEL NOT NULL NUMBER(4)    	//답글깊이
 R_HID   NOT NULL VARCHAR2(20) 	//답글작성자
-R_DATE  NOT NULL DATE  			//답글작성일자
+R_DATE  NOT NULL DATE  			//답글작성일자          
+COMMENTS NOT NULL VARCHAR2(1000)//답글내용
  */
 
 //create sequence c_idx;
@@ -25,4 +26,5 @@ public class Reply {
 	private int relevel;
 	private String rhid;
 	private String rdate;
+	private String comments;
 }
