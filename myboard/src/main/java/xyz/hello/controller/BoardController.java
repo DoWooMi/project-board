@@ -23,10 +23,12 @@ import lombok.RequiredArgsConstructor;
 import xyz.hello.dao.BoardDAO;
 import xyz.hello.dto.Board;
 import xyz.hello.dto.Hewon;
+import xyz.hello.dto.Reply;
 import xyz.hello.exception.BoardNotFoundException;
 import xyz.hello.exception.HewonNotFoundException;
 import xyz.hello.service.BoardService;
 import xyz.hello.service.HewonService;
+import xyz.hello.service.ReplyService;
 import xyz.hello.util.Pager;
 
 @Controller
@@ -37,6 +39,7 @@ public class BoardController {
 	private final WebApplicationContext context;
 	private final BoardDAO boardDAO;
 	private final HewonService hewonService;
+	private final ReplyService replyService;
 	
 	//게시글등록폼
 	@RequestMapping(value = "/new", method = RequestMethod.GET)
@@ -112,8 +115,18 @@ public class BoardController {
 		boardDAO.updateBoardcount(bidx);
 		model.addAttribute("boardview", boardService.getBoard(bidx));
 		model.addAttribute("hewoninfo", hewonService.getHewon(boardService.getBoard(bidx).getBhid()));
+		model.addAttribute("replylist", replyService.getReplyList(bidx));
 		return "blog/view";
 	}
+	
+	//댓글작성
+	@RequestMapping(value = "/writecomment", method = RequestMethod.POST)
+	public String writecomment(@ModelAttribute Reply reply, @RequestParam int rbidx) {
+		replyService.addBoard(reply);
+		return "redirect:/view?bidx="+rbidx;
+	}
+	
+	
 	
 	//게시글삭제
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)

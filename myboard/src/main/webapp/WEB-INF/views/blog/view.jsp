@@ -61,10 +61,11 @@
                     <div class="comments-area">
                     <div class="inner-title"><h3 class="mb-0">Comments</h3></div>
                     
+                        <c:forEach var="reply" items="${replylist }">
                         <div class="comment-box">
                             <div class="comment-info">
-                                <h6><a href="#">댓글작성자</a></h6>
-                                <p>댓글내용</p>
+                                <h6>${reply.rhid}</h6>
+                                <p>${reply.comments}</p>
                                 <div class="reply">
                                     <a href="#">
                                         <i class="fa fa-reply" aria-hidden="true"></i> Reply
@@ -72,6 +73,7 @@
                                 </div>
                             </div>
                         </div>
+                        </c:forEach>
                         <div class="comment-box">
                             <div class="comment-info">
                                 <h6><a href="#">대댓글작성자</a></h6>
@@ -93,19 +95,21 @@
                         <h4 class="mb-0">Post a Comment</h4>
                     </div>
 
-                    <form>
+                    <form name="f" method="post">
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label>Your Name</label>
-                                    <input type="text" class="form-control" name="name" placeholder="이름을 작성해주세요">
+                                    <input type="text" class="form-control" name="name" value="${hewoninfo.name }">
                                 </div>
                             </div>
 
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label>Your ID</label>
-                                    <input type="email" class="form-control" name="email" placeholder="ID를 작성해주세요">
+                                    <input type="text" class="form-control" name="rhid" value="${hewoninfo.id }">
+                                    <input type="hidden" class="form-control" name="rbidx" value="${boardview.bidx}">
+                                    <input type="hidden" class="form-control" name="regroup" value="0">
                                 </div>
                             </div>
                         </div>
@@ -114,12 +118,12 @@
                             <div class="col-12 mb-4">
                                 <label>Message</label>
                                 <div class="form-group mb-1">
-                                    <textarea rows="2" class="form-control" placeholder="댓글 입력..."></textarea>
+                                    <textarea rows="2" name="comments" id="comments" class="form-control" placeholder="댓글 입력..."></textarea>
                                 </div>
                             </div>
                         </div>
 
-                        <button type="button" class="butn-style2">Send Message</button>
+                        <button type="button" class="butn-style2" onclick="replyAdd();">Send Message</button>
                     </form>
                 	</div>
 
@@ -131,4 +135,26 @@
 	</div>
 </section>
 </body>
+<script type="text/javascript">
+function replyAdd() {
+	if ( f.name.value == "" ) {
+		alert("이름을 입력해주세요.");
+		f.name.focus();
+		return;
+	} 
+	if ( f.comments.value == "" ) {
+		alert("내용을 입력해주세요.");
+		f.comments.focus();
+		return;
+	}
+	f.action = "<c:url value="/writecomment"/>"
+	f.submit();
+}
+
+function reset() {
+	document.getElementById("content").value = "";
+	document.getElementById("title").value = "";
+}
+
+</script>
 </html>

@@ -1,12 +1,11 @@
 package xyz.hello.mapper;
 
 import java.util.List;
-import java.util.Map;
 
 import xyz.hello.dto.Reply;
 
 public interface ReplyMapper {
 	int insertReply(Reply reply);
 	int updateRestep(Reply reply);
-	List<Reply> selectreplylist(Map<String, Object> map);
+	List<Reply> selectreplylist(int rbidx);
 }

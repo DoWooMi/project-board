@@ -1,7 +1,6 @@
 package xyz.hello.service;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -19,7 +18,8 @@ public class ReplyServiceImpl implements ReplyService{
 	public void addBoard(Reply reply) {
 		int regroup = reply.getRegroup();
 		if(regroup==0) {
-			regroup=reply.getRidx();
+			regroup=reply.getRbidx();
+			reply.setRegroup(regroup);
 		} else {
 			replyDAO.updateRestep(reply);
 			int restep = reply.getRestep()+1;
@@ -31,8 +31,8 @@ public class ReplyServiceImpl implements ReplyService{
 	}
 
 	@Override
-	public List<Reply> getReplyList(Map<String, Object> map) {
-		return replyDAO.selectreplylist(map);
+	public List<Reply> getReplyList(int rbidx) {
+		return replyDAO.selectreplylist(rbidx);
 	}
 
 }

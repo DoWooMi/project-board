@@ -1,7 +1,6 @@
 package xyz.hello.dao;
 
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
@@ -27,8 +26,8 @@ public class ReplyDAOImpl implements ReplyDAO {
 	}
 
 	@Override
-	public List<Reply> selectreplylist(Map<String, Object> map) {
-		return sqlSession.getMapper(ReplyMapper.class).selectreplylist(map);
+	public List<Reply> selectreplylist(int rbidx) {
+		return sqlSession.getMapper(ReplyMapper.class).selectreplylist(rbidx);
 	}
 	
 
