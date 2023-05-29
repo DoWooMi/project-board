@@ -29,6 +29,16 @@ public class ReplyDAOImpl implements ReplyDAO {
 	public List<Reply> selectreplylist(int rbidx) {
 		return sqlSession.getMapper(ReplyMapper.class).selectreplylist(rbidx);
 	}
+
+	@Override
+	public int deletereply(int ridx) {
+		return sqlSession.getMapper(ReplyMapper.class).deletereply(ridx);
+	}
+
+	@Override
+	public int updateRelevel(Reply reply) {
+		return sqlSession.getMapper(ReplyMapper.class).updateRelevel(reply);
+	}
 	
 
 }

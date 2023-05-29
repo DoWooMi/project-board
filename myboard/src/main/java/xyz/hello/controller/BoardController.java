@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import lombok.RequiredArgsConstructor;
 import xyz.hello.dao.BoardDAO;
+import xyz.hello.dao.ReplyDAO;
 import xyz.hello.dto.Board;
 import xyz.hello.dto.Hewon;
 import xyz.hello.dto.Reply;
@@ -40,6 +41,7 @@ public class BoardController {
 	private final BoardDAO boardDAO;
 	private final HewonService hewonService;
 	private final ReplyService replyService;
+	private final ReplyDAO replyDAO;
 	
 	//게시글등록폼
 	@RequestMapping(value = "/new", method = RequestMethod.GET)
@@ -111,7 +113,9 @@ public class BoardController {
 	
 	//게시글출력폼
 	@RequestMapping(value = "/view", method = RequestMethod.GET)
-	public String blogview(@RequestParam int bidx, Model model) throws BoardNotFoundException, HewonNotFoundException {
+	public String blogview(@RequestParam int bidx, Model model, HttpSession session) throws BoardNotFoundException, HewonNotFoundException {
+		Hewon loginHewon= (Hewon)session.getAttribute("loginHewon");
+		model.addAttribute("loginHewon", loginHewon);
 		boardDAO.updateBoardcount(bidx);
 		model.addAttribute("boardview", boardService.getBoard(bidx));
 		model.addAttribute("hewoninfo", hewonService.getHewon(boardService.getBoard(bidx).getBhid()));
@@ -123,6 +127,13 @@ public class BoardController {
 	@RequestMapping(value = "/writecomment", method = RequestMethod.POST)
 	public String writecomment(@ModelAttribute Reply reply, @RequestParam int rbidx) {
 		replyService.addBoard(reply);
+		return "redirect:/view?bidx="+rbidx;
+	}
+	
+	//댓글삭제
+	@RequestMapping(value = "/deletereply", method = RequestMethod.GET)
+	public String deletereply(@RequestParam int rbidx, @RequestParam int ridx) {
+		replyDAO.deletereply(ridx);
 		return "redirect:/view?bidx="+rbidx;
 	}
 	

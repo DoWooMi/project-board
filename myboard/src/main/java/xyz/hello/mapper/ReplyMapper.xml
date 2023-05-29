@@ -10,7 +10,11 @@
 	</insert>
 	
 	<update id="updateRestep">
-		update reply set restep=restep+1 where regroup=#{regroup} and restep <![CDATA[>]]> #{restep} 
+		update reply set restep=restep+1 where regroup=#{regroup} and restep <![CDATA[>]]> #{restep}
+	</update>
+	
+	<update id="updateRelevel">
+		update reply set relevel=relevel+1, restep=restep+1 where regroup=#{regroup}
 	</update>
 	
 	<!-- 모댓글일경우 
@@ -41,8 +45,12 @@
 		insert into reply values (#{ridx}, #{rbidx}, #{regroup}, 0, #{relevel}, #{rhid}, sysdate)	
 	</insert>
 	-->
+	<delete id="deletereply">
+		delete from reply where r_idx=#{ridx}
+	</delete>
+	
 	<select id="selectreplylist" resultType="Reply">
-		select * from reply where r_bidx=#{rbidx} order by regroup asc, restep desc 
+		select * from reply where r_bidx=#{rbidx} order by regroup asc, restep desc, relevel asc
 	</select>
 	
 	

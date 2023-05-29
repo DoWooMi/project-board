@@ -20,14 +20,12 @@ public class ReplyServiceImpl implements ReplyService{
 		if(regroup==0) {
 			regroup=reply.getRbidx();
 			reply.setRegroup(regroup);
+			replyDAO.insertReply(reply);
 		} else {
+			replyDAO.insertReply(reply);
 			replyDAO.updateRestep(reply);
-			int restep = reply.getRestep()+1;
-			int relevel = reply.getRelevel()+1;
-			reply.setRestep(restep);
-			reply.setRelevel(relevel);
+			replyDAO.updateRelevel(reply);
 		}
-		replyDAO.insertReply(reply);
 	}
 
 	@Override

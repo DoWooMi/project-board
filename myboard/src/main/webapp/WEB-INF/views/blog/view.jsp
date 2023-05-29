@@ -8,7 +8,11 @@
 <html>
 <head >
 <style type="text/css">
-
+.replybutton{
+	background-color: white;
+	color: blue; 
+	font-weight: 600;
+}
 </style>
 <meta charset="UTF-8">
 <title>Blog view</title>
@@ -50,75 +54,74 @@
                      <!-- end post -->
                      
                     <div style="text-align: center;">
-					<br>
-					<p><button onclick="location.href='${pageContext.request.contextPath }/modify?bidx=${boardview.bidx }';" type="button" class="btn btn-primary btn-sm" >게시글변경</button>
-					<button onclick="location.href='${pageContext.request.contextPath }/blog';" type="button" class="btn btn-primary btn-sm">게시글목록</button>
-					<button onclick="location.href='${pageContext.request.contextPath }/delete?bidx=${boardview.bidx}';" type="button" class="btn btn-primary btn-sm">게시글삭제</button></p>
+					<span><button onclick="location.href='${pageContext.request.contextPath }/blog';" type="button" class="btn btn-primary btn-sm">게시글목록</button></span>
+					<c:if test="${loginHewon.id.equals(boardview.bhid) }">
+						<span><button onclick="location.href='${pageContext.request.contextPath }/modify?bidx=${boardview.bidx }';" type="button" class="btn btn-primary btn-sm" >게시글변경</button>
+						<button onclick="location.href='${pageContext.request.contextPath }/delete?bidx=${boardview.bidx}';" type="button" class="btn btn-primary btn-sm">게시글삭제</button></span>
+					</c:if>
 					</div>
-                            
+					<br>
                             
              		<!-- comment view -->
                     <div class="comments-area">
                     <div class="inner-title"><h3 class="mb-0">Comments</h3></div>
                     
                         <c:forEach var="reply" items="${replylist }">
-                        <div class="comment-box">
+                        <div class="comment-box" style="margin-left: ${reply.relevel > 0 ? '80px' : '0'}">
                             <div class="comment-info">
-                                <h6>${reply.rhid}</h6>
-                                <p>${reply.comments}</p>
+                            	<div class="meta ps-0 d-flex justify-content-between" style="font-weight: 600">
+                                     <p>🐣 작성자 : <span>${reply.rhid}</span></p>
+                                     <p>작성일자 : <span>${reply.rdate.substring(0,10)}</span></p>
+                                 </div>
+                            	<div class="meta ps-0 d-flex justify-content-between">
+	                                <p>${reply.comments}</p>
+	                                <c:if test="${loginHewon.id.equals(reply.rhid) }">
+                                     <button onclick="location.href='${pageContext.request.contextPath }/deletereply?ridx=${reply.ridx}&rbidx=${reply.rbidx }';" type="button" class="replybutton">삭제</button>
+                                 	</c:if>
+                                 </div>
+                                 
                                 <div class="reply">
-                                    <a href="#">
-                                        <i class="fa fa-reply" aria-hidden="true"></i> Reply
-                                    </a>
+                                    <button type="button" class="replybutton" onclick="rereply('${reply.ridx}');" id="rebtn"> ↳ Reply </button>
+                                    
+                                    <div id="replyDiv-${reply.ridx }" style="display: none;">
+                                    <form name="reply" method="post">
+				                        <div class="row">
+				                            <div class="col-12 mb-4">
+				                                <div class="">
+				                                    <textarea rows="1" name="comments" id="comments" class="form-control" placeholder="댓글 입력..."></textarea>
+				                                    <input type="hidden" class="form-control" name="rhid" value="${loginHewon.id }">
+				                                    <input type="hidden" class="form-control" name="rbidx" value="${boardview.bidx}">
+				                                    <input type="hidden" class="form-control" name="regroup" value="${reply.regroup}">
+				                                </div>
+				                            </div>
+				                        </div>
+				                        <button type="button" class="butn-style2" onclick="rereplyAdd('${reply.ridx}');">등록</button>
+				                    </form>
+				                    </div>
+				                    
                                 </div>
                             </div>
                         </div>
                         </c:forEach>
-                        <div class="comment-box">
-                            <div class="comment-info">
-                                <h6><a href="#">대댓글작성자</a></h6>
-                                <p>내용</p>
-                                <div class="reply">
-                                    <a href="#">
-                                        <i class="fa fa-reply" aria-hidden="true"></i> Reply
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                     <!-- end comment-->
                     
                     <!-- comment post -->
+                    <c:if test="${not empty loginHewon}">
                     <div class="common-block">
-
                     <div class="inner-title">
                         <h4 class="mb-0">Post a Comment</h4>
                     </div>
 
                     <form name="f" method="post">
                         <div class="row">
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label>Your Name</label>
-                                    <input type="text" class="form-control" name="name" value="${hewoninfo.name }">
-                                </div>
-                            </div>
-
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label>Your ID</label>
-                                    <input type="text" class="form-control" name="rhid" value="${hewoninfo.id }">
-                                    <input type="hidden" class="form-control" name="rbidx" value="${boardview.bidx}">
-                                    <input type="hidden" class="form-control" name="regroup" value="0">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
                             <div class="col-12 mb-4">
                                 <label>Message</label>
                                 <div class="form-group mb-1">
                                     <textarea rows="2" name="comments" id="comments" class="form-control" placeholder="댓글 입력..."></textarea>
+                                    <input type="hidden" class="form-control" name="rhid" value="${loginHewon.id }">
+                                    <input type="hidden" class="form-control" name="rbidx" value="${boardview.bidx}">
+                                    <input type="hidden" class="form-control" name="regroup" value="0">
                                 </div>
                             </div>
                         </div>
@@ -126,7 +129,7 @@
                         <button type="button" class="butn-style2" onclick="replyAdd();">Send Message</button>
                     </form>
                 	</div>
-
+					</c:if>
                     <!-- end form -->
                 </div>
             </div>
@@ -136,12 +139,7 @@
 </section>
 </body>
 <script type="text/javascript">
-function replyAdd() {
-	if ( f.name.value == "" ) {
-		alert("이름을 입력해주세요.");
-		f.name.focus();
-		return;
-	} 
+function replyAdd() { 
 	if ( f.comments.value == "" ) {
 		alert("내용을 입력해주세요.");
 		f.comments.focus();
@@ -151,10 +149,25 @@ function replyAdd() {
 	f.submit();
 }
 
-function reset() {
-	document.getElementById("content").value = "";
-	document.getElementById("title").value = "";
+function rereplyAdd(ridx) { 
+	var ref = document.forms['reply'];
+	if ( ref.comments.value.trim() === "" ) {
+		alert("내용을 입력해주세요.");
+		ref.comments.focus();
+		return;
+	}
+	ref.action = "<c:url value="/writecomment"/>"
+	ref.submit();
 }
 
+function rereply(replyRidx) {
+	var rereplydiv = document.getElementById("replyDiv-"+replyRidx);
+	
+	if(rereplydiv.style.display === "none"){
+	rereplydiv.style.display = "block";
+	} else {
+		rereplydiv.style.display = "none";
+	}
+}
 </script>
 </html>
