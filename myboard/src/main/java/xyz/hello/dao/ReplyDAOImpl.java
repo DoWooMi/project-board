@@ -39,6 +39,11 @@ public class ReplyDAOImpl implements ReplyDAO {
 	public int updateRelevel(Reply reply) {
 		return sqlSession.getMapper(ReplyMapper.class).updateRelevel(reply);
 	}
+
+	@Override
+	public int updateRegroup(int ridx) {
+		return sqlSession.getMapper(ReplyMapper.class).updateRegroup(ridx);
+	}
 	
 
 }

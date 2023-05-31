@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
-    <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
-    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     
 <!DOCTYPE html>
 <html>
@@ -17,6 +15,7 @@
 <meta charset="UTF-8">
 <title>Blog view</title>
 	<link href="${pageContext.request.contextPath}/css/styles.css" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 
@@ -81,14 +80,15 @@
                                  </div>
                                  
                                 <div class="reply">
+                                	<c:if test="${reply.relevel==0 }">
                                     <button type="button" class="replybutton" onclick="rereply('${reply.ridx}');" id="rebtn"> ↳ Reply </button>
-                                    
+                                    </c:if>
                                     <div id="replyDiv-${reply.ridx }" style="display: none;">
                                     <form name="reply" method="post">
 				                        <div class="row">
 				                            <div class="col-12 mb-4">
 				                                <div class="">
-				                                    <textarea rows="1" name="comments" id="comments" class="form-control" placeholder="댓글 입력..."></textarea>
+				                                    <textarea rows="1" name="comments" id="comments-${reply.ridx }" class="form-control" placeholder="댓글 입력..."></textarea>
 				                                    <input type="hidden" class="form-control" name="rhid" value="${loginHewon.id }">
 				                                    <input type="hidden" class="form-control" name="rbidx" value="${boardview.bidx}">
 				                                    <input type="hidden" class="form-control" name="regroup" value="${reply.regroup}">
@@ -151,9 +151,10 @@ function replyAdd() {
 
 function rereplyAdd(ridx) { 
 	var ref = document.forms['reply'];
-	if ( ref.comments.value.trim() === "" ) {
+	var comment=document.getElementById("comments-"+ridx);
+	if ( comment.value == "" ) {
 		alert("내용을 입력해주세요.");
-		ref.comments.focus();
+		comment.focus();
 		return;
 	}
 	ref.action = "<c:url value="/writecomment"/>"

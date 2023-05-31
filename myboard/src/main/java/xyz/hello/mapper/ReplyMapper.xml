@@ -8,49 +8,25 @@
 		</selectKey>
 		insert into reply values (#{ridx}, #{rbidx}, #{regroup}, 0, 0, #{rhid}, sysdate, #{comments})
 	</insert>
-	
+
+	<update id="updateRegroup">
+		update reply set regroup=#{ridx} where r_idx=#{ridx}
+	</update>
+		
 	<update id="updateRestep">
 		update reply set restep=restep+1 where regroup=#{regroup} and restep <![CDATA[>]]> #{restep}
 	</update>
 	
 	<update id="updateRelevel">
-		update reply set relevel=relevel+1, restep=restep+1 where regroup=#{regroup}
+		update reply set relevel=relevel+1, restep=restep+1 where r_idx=#{ridx}
 	</update>
-	
-	<!-- 모댓글일경우 
-	<update id="replycheck" parameterType="Reply">
-		update reply set regroup=#{regroup}
-		where r_idx != regroup
-	</update>
-	-->
-	<!-- 모댓글이 삭제될 경우 
-	<delete id="replydeleteall" parameterType="Reply">
-		delete from reply
-		where content="" and regroup=#{regroup}
-	</delete>
-	
-	<delete id="replydelete" parameterType="Reply">
-		delete from reply where r_idx=#{ridx}
-	</delete>
-	
-	<update id="replydeleteupdate" parameterType="Reply">
-		update reply set content="" where r_idx=#{ridx}
-	</update>
-	-->
-	<!-- 댓글의 답글 
-	<insert id="insertReReply" parameterType="Reply">
-		<selectKey resultType="int" keyProperty="ridx" order="BEFORE">
-			select ridx_seq.nextval from dual
-		</selectKey>
-		insert into reply values (#{ridx}, #{rbidx}, #{regroup}, 0, #{relevel}, #{rhid}, sysdate)	
-	</insert>
-	-->
+
 	<delete id="deletereply">
 		delete from reply where r_idx=#{ridx}
 	</delete>
 	
 	<select id="selectreplylist" resultType="Reply">
-		select * from reply where r_bidx=#{rbidx} order by regroup asc, restep desc, relevel asc
+		select * from reply where r_bidx=#{rbidx} order by regroup desc,  restep asc, relevel asc
 	</select>
 	
 	

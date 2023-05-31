@@ -18,9 +18,9 @@ public class ReplyServiceImpl implements ReplyService{
 	public void addBoard(Reply reply) {
 		int regroup = reply.getRegroup();
 		if(regroup==0) {
-			regroup=reply.getRbidx();
-			reply.setRegroup(regroup);
 			replyDAO.insertReply(reply);
+			regroup=reply.getRidx();
+			replyDAO.updateRegroup(regroup);
 		} else {
 			replyDAO.insertReply(reply);
 			replyDAO.updateRestep(reply);
