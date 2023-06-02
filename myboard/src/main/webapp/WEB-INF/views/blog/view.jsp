@@ -84,7 +84,7 @@
                                     <button type="button" class="replybutton" onclick="rereply('${reply.ridx}');" id="rebtn"> ↳ Reply </button>
                                     </c:if>
                                     <div id="replyDiv-${reply.ridx }" style="display: none;">
-                                    <form name="reply" method="post">
+                                    <form name="reply-${reply.ridx }" method="post">
 				                        <div class="row">
 				                            <div class="col-12 mb-4">
 				                                <div class="">
@@ -150,7 +150,7 @@ function replyAdd() {
 }
 
 function rereplyAdd(ridx) { 
-	var ref = document.forms['reply'];
+	var ref = document.forms['reply-'+ridx+''];
 	var comment=document.getElementById("comments-"+ridx);
 	if ( comment.value == "" ) {
 		alert("내용을 입력해주세요.");
