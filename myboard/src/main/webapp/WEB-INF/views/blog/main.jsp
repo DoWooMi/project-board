@@ -46,6 +46,9 @@
 		</div>
 		<div>
 			<input type="date" id="enddate" name="enddate" value="">
+		</div>&nbsp;&nbsp;&nbsp;&nbsp;
+		<div>
+			<input type="text" id="keyword" name="keyword" value="">
 		</div>&nbsp;&nbsp;
 		<button class="btn btn-primary py-2 px-4 rounded-pill shadow" type="submit" id="sub_btn" style="font-size: 1em;">검색</button>
   	</div>
@@ -74,6 +77,7 @@ function noticeListDisplay(pageNum) {
     const urlParams = new URLSearchParams(window.location.search);
     const startValue = urlParams.get('startdate');
     const endValue = urlParams.get('enddate');
+    const keywordValue = urlParams.get('keyword');
 
     
     $.ajax({
@@ -82,7 +86,8 @@ function noticeListDisplay(pageNum) {
         data: {
             pageNum: pageNum,
             sDate: startValue,
-            eDate: endValue
+            eDate: endValue,
+            keyword: keywordValue
         },	
         dataType: "json",
         success: function(result) {

@@ -101,6 +101,7 @@ public class BoardController {
 		pageMap.put("endRow", pager.getEndRow());
 		pageMap.put("sDate", params.get("sDate"));
 		pageMap.put("eDate", params.get("eDate"));
+		pageMap.put("keyword", params.get("keyword"));
 		
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		List<Board> boardList = boardService.getBoardList(pageMap);
@@ -122,6 +123,7 @@ public class BoardController {
 		model.addAttribute("replylist", replyService.getReplyList(bidx));
 		return "blog/view";
 	}
+	
 	
 	//댓글작성
 	@RequestMapping(value = "/writecomment", method = RequestMethod.POST)
@@ -181,12 +183,12 @@ public class BoardController {
 	}
 	
 	
-	
 	//예외처리
 	@ExceptionHandler(BoardNotFoundException.class)
 	public String userinfoExceptionHandler(BoardNotFoundException exception) {
 		return "exception/exception";
 	}
+		
 
 }
 
